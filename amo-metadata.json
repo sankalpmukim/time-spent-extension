@@ -1,0 +1,12 @@
+{
+  "version": {
+    "license": "MIT"
+  },
+  "categories": {
+    "firefox": ["other"]
+  },
+  "notes": "First release. Reviewer notes: (1) The extension is off by default — the user adds specific sites in the options page; each addition requests an optional origin permission for exactly that host and the content script is then registered dynamically via scripting.registerContentScripts (or contentScripts.register on Firefox MV2). No <all_urls> access is ever requested at install. (2) The 'identity' permission is used only for opt-in Sign in with Google sync: browser.identity.launchWebAuthFlow opens our hosted relay page (https://time-spent-site.sankalpmukim.workers.dev/auth/) which uses Google Identity Services and redirects back with an ID token; the token is verified server-side by our Convex backend. No credentials are read or stored by the extension beyond an opaque session token in storage.local. (3) Time tracking counts seconds while the tab is visible and focused, stored locally in storage.local; sync is opt-in and merges per-day totals keeping the max. (4) The two innerHTML lint warnings come from the bundled React runtime used by the options page (react-dom), not from our code. Full, unminified source: https://github.com/sankalpmukim/time-spent-extension (also available as sources zip on request).",
+  "summary": {
+    "en-US": "Big, unmissable digits showing how long you've been on a website today. Off by default — pick your doomscrolling sites, and watch the counter grow. Local-first; optional sync across browsers and devices."
+  }
+}

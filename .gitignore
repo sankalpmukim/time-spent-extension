@@ -1,0 +1,16 @@
+node_modules/
+.output/
+.wxt/
+.env
+.env.local
+*.log
+dist/
+.wrangler/
+.DS_Store
+.env.amo
+.cws-tokens.json
+site/node_modules/
+site/.cloudflare/
+site/.wrangler/
+site/dist/
+.agents/

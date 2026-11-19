@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Time Spent — a shame counter for your doomscrolling</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A browser extension that shows how much time you've spent on a website today in big, impossible-to-miss digits. Local-first. Optional sync across browsers and devices."
+    />
+    <style>
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: #101014;
+        color: #f2f2f7;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+        line-height: 1.6;
+      }
+      .wrap { max-width: 720px; margin: 0 auto; padding: 48px 20px 96px; }
+      .hero { text-align: center; padding: 32px 0 8px; }
+      .digits {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-variant-numeric: tabular-nums;
+        font-weight: 700;
+        font-size: clamp(40px, 9vw, 76px);
+        letter-spacing: -0.02em;
+        background: rgba(13,13,16,0.86);
+        border-radius: 0.35em;
+        padding: 0.32em 0.6em;
+        display: inline-block;
+        box-shadow: 0 2px 14px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.14);
+        color: #ff453a;
+        text-shadow: 0 0 14px rgba(255,69,58,0.9);
+        animation: pulse 1s ease-in-out infinite alternate;
+      }
+      @keyframes pulse {
+        from { transform: scale(1); }
+        to { transform: scale(1.06); }
+      }
+      h1 { font-size: 28px; margin: 28px 0 8px; letter-spacing: -0.02em; }
+      .tag { color: #9a9aa5; font-size: 17px; margin: 0 0 24px; }
+      .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+      .cta a {
+        display: inline-block;
+        background: #4f7cff;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        border-radius: 999px;
+        padding: 12px 22px;
+        font-size: 15px;
+      }
+      .cta a.secondary { background: #1f1f28; border: 1px solid #2a2a34; color: #f2f2f7; }
+      h2 { font-size: 18px; margin: 48px 0 12px; color: #9a9aa5; text-transform: uppercase; letter-spacing: 0.08em; }
+      ul { padding-left: 20px; color: #cfcfd6; }
+      li { margin: 8px 0; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+      .card { background: #191920; border: 1px solid #2a2a34; border-radius: 12px; padding: 16px; }
+      .card strong { display: block; margin-bottom: 4px; }
+      .card p { margin: 0; color: #9a9aa5; font-size: 14px; }
+      footer { margin-top: 64px; color: #63636e; font-size: 13px; text-align: center; }
+      code { background: #1f1f28; border-radius: 4px; padding: 1px 6px; font-size: 13px; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="hero">
+        <span class="digits">2:41:07</span>
+        <h1>Time Spent</h1>
+        <p class="tag">A shame counter for your doomscrolling — in big digits you can't unsee.</p>
+        <div class="cta">
+          <a href="https://addons.mozilla.org/firefox/addon/time-spent1/">Install for Firefox</a>
+          <a class="secondary" href="https://chromewebstore.google.com/detail/time-spent/fhnlllibaooecdllgedhalbkihljdmdh">Install for Chrome</a>
+        </div>
+      </div>
+
+      <h2>How it works</h2>
+      <ul>
+        <li>Off by default. You pick the sites (youtube.com, reddit.com, x.com…) and only those get a counter.</li>
+        <li>A big timer sits in the corner of the page all day, counting up while the tab is visible and focused. Switch away and it stops.</li>
+        <li>After your first threshold, the digits grow — linearly, the more you scroll.</li>
+        <li>After your second threshold, they turn red and pulse.</li>
+        <li>Drag the counter to any corner if it's covering something. That's the only control you get. There is no hide button. That's the point.</li>
+      </ul>
+
+      <h2>Local-first, sync optional</h2>
+      <div class="grid">
+        <div class="card">
+          <strong>No account needed</strong>
+          <p>Everything is stored in your browser. Sign in only if you want your totals merged across Firefox, Chrome, and Firefox on Android.</p>
+        </div>
+        <div class="card">
+          <strong>Anti-cheat merge</strong>
+          <p>When syncing, devices merge daily totals by always keeping the larger number. Clearing one browser doesn't reset anything.</p>
+        </div>
+        <div class="card">
+          <strong>Minimal permissions</strong>
+          <p>No access to any site until you explicitly track it. Time counting happens locally, per second, only while you're actually looking.</p>
+        </div>
+      </div>
+
+      <h2>Browsers</h2>
+      <ul>
+        <li>Firefox desktop + <strong>Firefox on Android</strong> (Manifest V2)</li>
+        <li>Chrome, Edge, Brave, Arc and other Chromium browsers (Manifest V3)</li>
+      </ul>
+
+      <footer>
+        Time Spent is free and open source. Sync is powered by a tiny Convex backend; the sign-in
+        relay runs on Cloudflare. Questions? <code>time-spent@mukim.dev</code>
+      </footer>
+    </div>
+  </body>
+</html>

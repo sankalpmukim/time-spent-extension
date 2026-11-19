@@ -1,0 +1,14 @@
+{
+  "name": "time-spent-site",
+  "private": true,
+  "scripts": {
+    "deploy": "cf deploy",
+    "dev": "cf dev"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "beta",
+    "cf": "1.0.0-rc.1",
+    "vite": "^7.0.0"
+  },
+  "type": "module"
+}
