@@ -34,25 +34,34 @@ async function jwt() {
 const token = await jwt();
 const headers = { Authorization: `JWT ${token}`, "Content-Type": "application/json" };
 
-// find the version id
-const detailRes = await fetch(`${BASE}/addons/addon/${encodeURIComponent(ADDON_ID)}/all_versions/`, {
-  headers,
-});
-const detail = await detailRes.json();
-if (!detailRes.ok) {
-  console.error("lookup failed:", JSON.stringify(detail).slice(0, 300));
-  process.exit(1);
+// find the version id (try id, then slug; unlisted versions need ?filter=all + auth)
+const tries = [encodeURIComponent(ADDON_ID), "time-spent1"];
+let version = null;
+let lastErr = "";
+for (const key of tries) {
+  const byVersion = await fetch(`${BASE}/addons/addon/${key}/versions/${VERSION}/`, { headers });
+  if (byVersion.ok) {
+    const v = await byVersion.json();
+    if (v?.id) { version = v; break; }
+  }
+  const res = await fetch(`${BASE}/addons/addon/${key}/versions/`, { headers });
+  const body = await res.json();
+  if (res.ok) {
+    version = (body.results ?? []).find((v) => v.version === VERSION) ?? null;
+    if (version) break;
+    lastErr = `version ${VERSION} not found under ${key}; existing: ${JSON.stringify((body.results ?? []).map((v) => v.version))}`;
+  } else {
+    lastErr = `${res.status} ${JSON.stringify(body).slice(0, 200)}`;
+  }
 }
-const version = (detail.results ?? []).find((v) => v.version === VERSION);
 if (!version) {
-  console.error(`version ${VERSION} not found; existing:`, (detail.results ?? []).map((v) => v.version));
+  console.error("lookup failed:", lastErr);
   process.exit(1);
 }
 console.log("version id:", version.id, "| channel:", version.channel);
 
 const form = new FormData();
 form.set("source", new Blob([readFileSync(SOURCES)], { type: "application/zip" }), "sources.zip");
-form.set("upload", ""); // empty keeps the existing upload
 
 const patchRes = await fetch(`${BASE}/addons/addon/${encodeURIComponent(ADDON_ID)}/versions/${version.id}/`, {
   method: "PATCH",
