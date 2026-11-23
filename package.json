@@ -1,7 +1,7 @@
 {
   "name": "time-spent",
   "description": "Big, unmissable digits showing how much time you've spent on a website today. Local-first, optional cross-device sync.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "wxt",

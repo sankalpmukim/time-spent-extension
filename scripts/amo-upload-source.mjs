@@ -2,7 +2,7 @@
  * Attaches the sources zip to the pending AMO version (retry-safe).
  * Uses the AMO v5 API with a JWT minted from the key/secret in .env.amo.
  *
- *   AMO_ADDON_ID=time-spent@mukim.dev AMO_VERSION=0.1.0 node scripts/amo-upload-source.mjs
+ *   AMO_ADDON_ID=time-spent@mukim.dev AMO_VERSION=0.1.1 node scripts/amo-upload-source.mjs
  */
 import { readFileSync } from "node:fs";
 import { SignJWT } from "jose";
@@ -15,7 +15,7 @@ const env = Object.fromEntries(
 );
 
 const ADDON_ID = process.env.AMO_ADDON_ID ?? "time-spent@mukim.dev";
-const VERSION = process.env.AMO_VERSION ?? "0.1.0";
+const VERSION = process.env.AMO_VERSION ?? "0.1.1";
 const SOURCES = process.env.AMO_SOURCES ?? `.output/time-spent-${VERSION}-sources.zip`;
 const BASE = "https://addons.mozilla.org/api/v5";
 
