@@ -63,10 +63,14 @@ async function initOverlay(): Promise<void> {
   const style = container.style;
   style.setProperty("all", "initial");
   style.position = "fixed";
+  // Span the viewport: insets 0 with auto size (NOT 100vw/100vh, which would tuck
+  // the chip under classic scrollbars). The chip is absolutely positioned inside
+  // this box, so its `right`/`bottom` insets need the box to reach the viewport
+  // edges — a 0×0 box placed every corner except "tl" off-screen.
   style.top = "0";
   style.left = "0";
-  style.width = "0";
-  style.height = "0";
+  style.right = "0";
+  style.bottom = "0";
   style.zIndex = "2147483647";
   style.pointerEvents = "none";
 
